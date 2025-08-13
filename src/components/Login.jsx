@@ -2,7 +2,8 @@ import { BACKGROUND_IMG_URL } from "../utilities/constants";
 import { performValidation } from "../utilities/validation";
 import { useRef, useState } from "react";
 import Header from "./Header";
-
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from "../utilities/firebase";
 const Login = () => {
   
   const [isSignInForm, setSignInForm] = useState(true);
@@ -19,6 +20,39 @@ const Login = () => {
     setErrorMessage(message);
     // console.log(email.current.value);
     // console.log(password.current.value);
+
+    if(message) return;  // if something string we get insted of null means vlaidation is not correct so we return it back 
+    // if validation is correct we have to signin / signup the user
+    if(!isSignInForm){
+      //signup
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(errorCode + "-" + errorMessage);
+      });
+    }
+    else{
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        
+        //if(errorCode == "auth/invalid-credential") setErrorMessage("email is not registered.")
+        setErrorMessage(errorCode+ "-" + errorMessage);
+      });
+
+    }
   };
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);

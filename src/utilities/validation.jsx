@@ -7,7 +7,7 @@ export const performValidation = (email, password) =>{
 
     //when isEmailValid returns false we need to handle it by showing an error msg
     if(!isEmailValid) return "Invalid Email address. Please give the correct Email";
-    if(!isPasswordValid) return "Please enter a valid password";
+    if(!isPasswordValid) return "Password must include a capital letter, number and special letters";
 
     //when they are valid we return null
     return null;
