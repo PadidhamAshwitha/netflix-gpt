@@ -1,11 +1,18 @@
-import { BACKGROUND_IMG_URL } from "../utilities/constants";
-import { performValidation } from "../utilities/validation";
 import { useRef, useState } from "react";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+
 import Header from "./Header";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { BACKGROUND_IMG_URL, GITHUB_PHOTO_URL } from "../utilities/constants";
+import { performValidation } from "../utilities/validation";
 import {auth} from "../utilities/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utilities/userSlice";
+
 const Login = () => {
-  
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignInForm, setSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   
@@ -21,7 +28,7 @@ const Login = () => {
     // console.log(email.current.value);
     // console.log(password.current.value);
 
-    if(message) return;  // if something string we get insted of null means vlaidation is not correct so we return it back 
+    if(message) return;  // if something string we get instead of null means validation is not correct so we return it back 
     // if validation is correct we have to signin / signup the user
     if(!isSignInForm){
       //signup
@@ -30,6 +37,20 @@ const Login = () => {
         // Signed up 
         const user = userCredential.user;
         console.log(user);
+        updateProfile(user, {
+          displayName: fullname?.current?.value ,
+          photoURL: GITHUB_PHOTO_URL,
+          })
+          .then(() => {
+            const {uid, email, displayName, photoURL} = auth.currentUser;
+            dispatch(addUser({
+              uid:uid,
+              email : email,
+              displayName : displayName,
+              photoURL : photoURL,
+            }));
+          });
+        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -43,6 +64,7 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
+        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
