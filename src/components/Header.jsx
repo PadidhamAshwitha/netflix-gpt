@@ -1,13 +1,17 @@
+import { addUser, removeUser } from '../utilities/userSlice';
+import { LOGO_URL, 
+  NOTIFICATION_ICON, 
+  PROFILE_LOGO, 
+  GITHUB_PHOTO_URL } from '../utilities/constants';
 
-import { useSelector } from 'react-redux';
-import { LOGO_URL, NOTIFICATION_ICON, PROFILE_LOGO, GITHUB_PHOTO_URL } from '../utilities/constants';
-import Profile from './Profile';
-import { useState } from 'react';
-import { signOut } from 'firebase/auth';
 import { auth } from '../utilities/firebase';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  
   const user = useSelector(store=>store.user);
   // const {displayName, photoURL } = user;
 
@@ -15,6 +19,7 @@ const Header = () => {
   const photoURL = GITHUB_PHOTO_URL;
   
   console.log(user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -28,12 +33,33 @@ const Header = () => {
   };
 
   const handleSignOut = () => {
-    signOut(auth).then(() => {
-    navigate("/");
-    }).catch((error) => {
+    signOut(auth).then(() => {})
+    .catch((error) => {
       navigate("/error");
     });
   }
+
+  useEffect(()=>{
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // signIn (or) signUp
+          const {uid, email, displayName, photoURL} = user;
+          dispatch(addUser({
+            uid : uid,
+            email : email, 
+            displayName : displayName,
+            photoURl : photoURL,
+          }));
+          navigate("/browse");
+        } else {
+          //sign out
+          dispatch(removeUser());
+          navigate("/");
+        }
+  });
+  
+    },[]);
+
 
   return (
     <div>

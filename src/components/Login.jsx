@@ -5,13 +5,11 @@ import Header from "./Header";
 import { BACKGROUND_IMG_URL, GITHUB_PHOTO_URL } from "../utilities/constants";
 import { performValidation } from "../utilities/validation";
 import {auth} from "../utilities/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utilities/userSlice";
 
 const Login = () => {
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignInForm, setSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -50,7 +48,6 @@ const Login = () => {
               photoURL : photoURL,
             }));
           });
-        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -64,7 +61,6 @@ const Login = () => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
-        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
