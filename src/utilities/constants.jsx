@@ -7,3 +7,13 @@ export const PROFILE_LOGO = "https://occ-0-3215-3663.1.nflxso.net/dnm/api/v6/vN7
 export const GITHUB_PHOTO_URL = "https://avatars.githubusercontent.com/u/181178901?s=400&u=6f52ea8f316f453ec9e166adeaf9b3994f17a4d1&v=4";
 
 export const NOTIFICATION_ICON = "https://tse3.mm.bing.net/th/id/OIP.r5gQKjxiZEnnVnErniZOVQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3";
+
+export const API_OPTIONS = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZGIxYWQ5ZTllYTRlNjI0ZDJiMGEzN2EzYzgzYTdhYyIsIm5iZiI6MTc1NTk0MDMyMC4xNzcsInN1YiI6IjY4YTk4NWUwODUxNzI4MTg1NDFlNDc4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NstnI4rR9_6F8B2iDppJdboSLTNP-C4JwQAsYJUw2JM'
+  }
+};
+
+export const TMDB_NOWPLAYING_API = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";

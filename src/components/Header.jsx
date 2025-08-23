@@ -11,14 +11,13 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  
+
   const user = useSelector(store=>store.user);
-  // const {displayName, photoURL } = user;
+  // const {displayName, photoURL } = user; // here displayname and photoURL are null cant destructure it
 
   const displayName = "Ashwitha";
   const photoURL = GITHUB_PHOTO_URL;
-  
-  console.log(user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
@@ -40,7 +39,7 @@ const Header = () => {
   }
 
   useEffect(()=>{
-      onAuthStateChanged(auth, (user) => {
+      const unSubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
           // signIn (or) signUp
           const {uid, email, displayName, photoURL} = user;
@@ -57,7 +56,7 @@ const Header = () => {
           navigate("/");
         }
   });
-  
+   return () => unSubscribe();
     },[]);
 
 
