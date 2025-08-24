@@ -17,3 +17,5 @@ export const API_OPTIONS = {
 };
 
 export const TMDB_NOWPLAYING_API = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+
+export const POSTER_PATH = "https://media.themoviedb.org/t/p/w600_and_h900_bestv2";
