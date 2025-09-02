@@ -28,3 +28,13 @@ export const TMDB_TOP_RATED_API = "https://api.themoviedb.org/3/movie/top_rated?
 
 export const TMDB_UPCOMING_API = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
 
+// SUPPORTED_LANGUAGES is used in options of select element to show differen languages as dropdown
+// IMPORTANT NOTE: here identifier is the key in the languages (and it must be same)
+// it shows how many languages we are supporting right now
+export const SUPPORTED_LANGUAGES = [
+  {identifier : "en", name : "English"},
+  {identifier : "hindi", name : "Hindi"},
+  {identifier : "telugu", name : "Telugu"},
+  {identifier : "spanish", name : "Spanish"},
+  {identifier : "arabic", name : "Arabic"},
+];

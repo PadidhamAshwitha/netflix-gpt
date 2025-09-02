@@ -11,7 +11,6 @@ const useTopRatedMovies = () => {
         const data = await fetch(TMDB_TOP_RATED_API, API_OPTIONS);
         const json = await data.json();
         dispatch(addTopRatedMovies(json?.results));
-        console.log(json);
     };
         useEffect(() => {
             getTopRatedMovies();

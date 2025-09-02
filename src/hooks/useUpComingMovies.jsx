@@ -11,7 +11,6 @@ const useUpComingMovies = () => {
         const data = await fetch(TMDB_UPCOMING_API, API_OPTIONS);
         const json = await data.json();
         dispatch(addUpComingMovies(json?.results));
-        console.log(json);
     };
         useEffect(() => {
             getUpComingMovies();

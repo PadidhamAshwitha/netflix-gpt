@@ -3,6 +3,9 @@ import { LOGO_URL,
   NOTIFICATION_ICON, 
   PROFILE_LOGO, 
   GITHUB_PHOTO_URL } from '../utilities/constants';
+import {SUPPORTED_LANGUAGES} from "../utilities/constants";
+import {toggleGptSearchView } from "../utilities/gptSlice";
+import {changeLanguage} from "../utilities/configSlice";
 
 import { auth } from '../utilities/firebase';
 import { useEffect, useState } from 'react';
@@ -11,18 +14,24 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector(store=>store.user);
+  const showGptSearch = useSelector(store => store.gpt.showGptSearch);
   // const {displayName, photoURL } = user; // here displayname and photoURL are null cant destructure it
 
   const displayName = "Ashwitha";
   const photoURL = GITHUB_PHOTO_URL;
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [showNotification, setShowNotification] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  
+
+  const handleGptSearchClick = () => {
+    //this dispatch action will toggle the showGptSearch in slice and  
+    //not require any action to be givien. becz we aren't pushing any value
+    dispatch(toggleGptSearchView());
+  }
   const handleNotificationClick = ()=>{
     setShowNotification(!showNotification);
   };
@@ -38,6 +47,10 @@ const Header = () => {
     });
   }
 
+  const handleLanguageChange = (e) =>{ // can also done with useRef
+    dispatch(changeLanguage(e.target.value));
+  };
+  
   useEffect(()=>{
       const unSubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -71,8 +84,28 @@ const Header = () => {
       />
       
       {user && (
-        <div className = "w-20 h-14 m-2 flex justify-right ">
-
+        <div className = "h-14 m-2 flex justify-right items-center ">
+          {showGptSearch && (
+            <select 
+          className="m-2 px-4 py-2 font-semibold text-white bg-black cursor-pointer border border-white "
+          onChange={handleLanguageChange}
+          >
+            {SUPPORTED_LANGUAGES.map((lang) => (
+              <option 
+              className = "font-semibold p-2 "
+              key = {lang.identifier} 
+              value = {lang.identifier}
+              >
+              {lang.name}
+              </option>))}
+          </select>)}
+        <button
+        className = "px-6 py-2  text-white bg-red-600 font-bold hover:bg-red-700 hover:border border-white min-w-20 rounded-lg cursor-pointer"
+        onClick = {handleGptSearchClick}
+        >
+          {showGptSearch ? "Home Page" : "GPT Search"}
+        </button>
+        
         <img 
         onClick={handleNotificationClick}
         className="w-10 m-2 rounded-lg cursor-pointer"
