@@ -38,3 +38,4 @@ export const SUPPORTED_LANGUAGES = [
   {identifier : "spanish", name : "Spanish"},
   {identifier : "arabic", name : "Arabic"},
 ];
+      
