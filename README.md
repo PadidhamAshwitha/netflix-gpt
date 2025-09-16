@@ -73,51 +73,49 @@ cd netflix-gpt
 </pre>
 
 ---
-## Folder Structure
-<pre>
-```
-src
+## 📂 Folder Structure
+
+```bash
+src/
 ├── App.jsx
-├── components
-    ├── Body.jsx                  # Provided routing for for login, browse and error pages
-    ├── Browse.jsx                # Contains Main and secondary container
-    ├── DisplayMovie.jsx          # On click of movieCard plays movie 
-    ├── ErrorPage.jsx             # displays error
-    ├── Footer.jsx                # Contains the footer info for contact
-    ├── GptMovieSuggestions.jsx   # Movies suggested accoording to prompt
-    ├── GptSearchBar.jsx          # SearchBar to give the prompt 
-    ├── GptSearchPage.jsx         # contains searchbar and suggestions components
-    ├── Header.jsx                # Display navigation elements for signout, gptsearch
-    ├── Login.jsx                 # Firebase authentication and signIn and signUp for users
-    ├── MainContainer.jsx         # Contains videoTitle and VideoBackground components
-    ├── MovieCard.jsx                
-    ├── MovieList.jsx             # Displays a list of movies like horror, comedy 
-    ├── SecondaryContainer.jsx    # contains moviecards and lists
-    ├── VideoBackground.jsx
-    └── VideoTitle.jsx
-├── hooks                         # custom hooks for fetching trailer, NowPlaying, Popular, TopRated and UpComing movies.
-|   ├── useMovieTrailer.jsx
-|   ├── useNowPlayingMovies.jsx
-|   ├── usePopularMovies.jsx
-|   ├── useTopRatedMovies.jsx
-|   └── useUpComingMovies.jsx
-|
+├── components/
+├── Body.jsx                  # Provided routing for login, browse, and error pages
+├── Browse.jsx                # Contains Main and secondary container
+├── DisplayMovie.jsx          # On click of movieCard plays movie
+├── ErrorPage.jsx             # Displays error
+├── Footer.jsx                # Contains footer info for contact
+├── GptMovieSuggestions.jsx   # Movies suggested according to prompt
+├── GptSearchBar.jsx          # SearchBar to give the prompt
+├── GptSearchPage.jsx         # Contains searchbar and suggestions
+├── Header.jsx                # Navigation elements (sign out, GPT search)
+├── Login.jsx                 # Firebase authentication
+├── MainContainer.jsx         # VideoTitle and VideoBackground components
+├── MovieCard.jsx
+├── MovieList.jsx             # Displays list of movies by genre
+├── SecondaryContainer.jsx    # Contains moviecards & lists
+├── VideoBackground.jsx
+├── VideoTitle.jsx
+├── hooks/
+│   ├── useMovieTrailer.jsx
+│   ├── useNowPlayingMovies.jsx
+│   ├── usePopularMovies.jsx
+│   ├── useTopRatedMovies.jsx
+│   └── useUpComingMovies.jsx
 ├── index.css
 ├── main.jsx
-└── utilities                    
-    ├── appStore.js               # a redux store has config, user, selectedMovie, gpt, movies slices.
+└── utilities/
+    ├── appStore.js            # Redux store config, slices
     ├── configSlice.jsx
-    ├── constants.jsx            # for HardCoded data such as links
+    ├── constants.jsx          # Hardcoded data like links
     ├── firebase.js
     ├── gptSlice.jsx
-    ├── languageConstants.jsx    # contains text in different languages
+    ├── languageConstants.jsx
     ├── moviesSlice.jsx
     ├── openai.js
     ├── selectedMovieSlice.jsx
     ├── userSlice.js
-    └── validation.jsx           # for form validation
-```
-</pre>
+    └── validation.jsx         # Form validation helpers
+
 ## Live Demo
 
 - You can access the live demo of the project [here.](https://searchmovierecommendationsystem.netlify.app/)
