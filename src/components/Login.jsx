@@ -23,8 +23,6 @@ const Login = () => {
     //here it validate the form
     const message = performValidation(email.current.value, password.current.value);
     setErrorMessage(message);
-    // console.log(email.current.value);
-    // console.log(password.current.value);
 
     if(message) return;  // if something string we get instead of null means validation is not correct so we return it back 
     // if validation is correct we have to signin / signup the user
@@ -34,7 +32,6 @@ const Login = () => {
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
-        console.log(user);
         updateProfile(user, {
           displayName: fullname?.current?.value ,
           photoURL: GITHUB_PHOTO_URL,
@@ -52,7 +49,8 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setErrorMessage(errorCode + "-" + errorMessage);
+        //setErrorMessage(errorCode + "-" + errorMessage);
+        setErrorMessage("Already Regestered. Try Signing in");
       });
     }
     else{
@@ -60,14 +58,14 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user);
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         
-        //if(errorCode == "auth/invalid-credential") setErrorMessage("email is not registered.")
-        setErrorMessage(errorCode+ "-" + errorMessage);
+        setErrorMessage("email is not registered. Try Signing up")
+        //setErrorMessage(errorCode+ "-" + errorMessage);
       });
 
     }
@@ -78,12 +76,15 @@ const Login = () => {
   return (
     <div >
       <Header />
-      <div className="absolute">
-        <img src= {BACKGROUND_IMG_URL} alt = "background-image" />
+      <div className="absolute ">
+        <img 
+        className="fixed h-screen w-screen object-cover"
+        src= {BACKGROUND_IMG_URL} 
+        alt = "background-image" />
       </div>
 
       <form onSubmit={(e) => e.preventDefault()}
-      className="absolute w-3/12 p-8 min-w-[320px] my-36 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-xl bg-[rgba(0,0,0,0.85)]"
+      className="absolute w-3/12 p-8 min-w-[320px] my-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white rounded-xl bg-[rgba(0,0,0,0.85)]"
       >
         
         <h1 className="text-3xl font-bold p-2 ">{isSignInForm ? "Sign In" : "Sign Up"}</h1>

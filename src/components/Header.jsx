@@ -75,16 +75,16 @@ const Header = () => {
 
   return (
     <div>
-      <header className=" absolute px-12 bg-gradient-to-b from-black z-10 flex justify-between">
+      <header className=" absolute md:mr-12 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
       
       <img 
-      className="w-2/12 " 
+      className="w-5/12 md:w-2/12 mx-auto md:mx-0 " 
       src= {LOGO_URL} 
       alt = "netflix-logo" 
       />
       
       {user && (
-        <div className = "h-14 m-2 flex justify-right items-center ">
+        <div className = "h-14 m-2 flex justify-between items-center ">
           {showGptSearch && (
             <select 
           className="m-2 px-4 py-2 font-semibold text-white bg-black cursor-pointer border border-white "
@@ -108,7 +108,7 @@ const Header = () => {
         
         <img 
         onClick={handleNotificationClick}
-        className="w-10 m-2 rounded-lg cursor-pointer"
+        className="w-10 m-2 rounded-lg cursor-pointer hidden md:block"
         src = {NOTIFICATION_ICON}
         alt = "notification_icon"
         />
@@ -131,7 +131,7 @@ const Header = () => {
       </div>
     )}
     {showProfile && (
-      <div className = " z-10 pt-2 m-2 mt-16 ml-350 text-white absolute rounded-xl bg-[rgba(0,0,0,0.85)]">
+      <div className = "z-10 pt-2 m-2 mt-16 ml-350 text-white absolute rounded-xl bg-[rgba(0,0,0,0.85)]">
         <div className = "flex">
         <p className = "p-2 font-bold hover:shadow-xl">{displayName}</p>
         <img className = "w-3/12 rounded-lg" src={photoURL}/>

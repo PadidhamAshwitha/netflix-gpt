@@ -1,21 +1,7 @@
-<!-- # React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project. -->
-
-
 # 🎬 Netflix-GPT
 
-Netflix-GPT is a **Netflix-inspired web application** built with **Vite**, **Tailwind CSS**, **Firebase Authentication**, **Redux**, and **TMDB APIs**, **Multiple language support**.  
-It offers a modern movie-browsing experience with authentication, AI-powered search, and smooth UI interactions.
+- Netflix-GPT is a **Netflix-inspired web application** built with **Vite**, **Tailwind CSS**, **Firebase Authentication**, **Redux**, and **TMDB APIs**, **Multiple language support**.  
+- It offers a modern movie-browsing experience with authentication, AI-powered search, and smooth UI interactions.
 Through this project I have gained deep understandings of react core, firebase and efficient use of Redux.
 ---
 
@@ -41,9 +27,19 @@ Through this project I have gained deep understandings of react core, firebase a
     - Now Playing
     - Trending
     - Horror
+    - popular
     - (and more…)
 - **Multi - Language Support**
 - The application available in multiple languages and can be seamlessly change the language.
+
+- **Responsive**
+- Made application to be responsive for mobile and desktop using tailwind css
+
+- **Memoization**
+- Handled the fetch calls wisely using memoization. So that data fetches only once and stores in Redux.
+
+- **Display Movie**
+- On click of the movie card it plays the movie 
 ---
 
 ## 🛠️ Technologies Used
@@ -62,7 +58,7 @@ Through this project I have gained deep understandings of react core, firebase a
 <pre>
 ```
 git clone https://github.com/PadidhamAshwitha/netflix-gpt.git
-cd foodify
+cd netflix-gpt
 ```
 </pre>
 
@@ -77,7 +73,51 @@ cd foodify
 </pre>
 
 ---
-
+## Folder Structure
+<pre>
+```
+src
+├── App.jsx
+├── components
+    ├── Body.jsx                  # Provided routing for for login, browse and error pages
+    ├── Browse.jsx                # Contains Main and secondary container
+    ├── DisplayMovie.jsx          # On click of movieCard plays movie 
+    ├── ErrorPage.jsx             # displays error
+    ├── Footer.jsx                # Contains the footer info for contact
+    ├── GptMovieSuggestions.jsx   # Movies suggested accoording to prompt
+    ├── GptSearchBar.jsx          # SearchBar to give the prompt 
+    ├── GptSearchPage.jsx         # contains searchbar and suggestions components
+    ├── Header.jsx                # Display navigation elements for signout, gptsearch
+    ├── Login.jsx                 # Firebase authentication and signIn and signUp for users
+    ├── MainContainer.jsx         # Contains videoTitle and VideoBackground components
+    ├── MovieCard.jsx                
+    ├── MovieList.jsx             # Displays a list of movies like horror, comedy 
+    ├── SecondaryContainer.jsx    # contains moviecards and lists
+    ├── VideoBackground.jsx
+    └── VideoTitle.jsx
+├── hooks                         # custom hooks for fetching trailer, NowPlaying, Popular, TopRated and UpComing movies.
+|   ├── useMovieTrailer.jsx
+|   ├── useNowPlayingMovies.jsx
+|   ├── usePopularMovies.jsx
+|   ├── useTopRatedMovies.jsx
+|   └── useUpComingMovies.jsx
+|
+├── index.css
+├── main.jsx
+└── utilities                    
+    ├── appStore.js               # a redux store has config, user, selectedMovie, gpt, movies slices.
+    ├── configSlice.jsx
+    ├── constants.jsx            # for HardCoded data such as links
+    ├── firebase.js
+    ├── gptSlice.jsx
+    ├── languageConstants.jsx    # contains text in different languages
+    ├── moviesSlice.jsx
+    ├── openai.js
+    ├── selectedMovieSlice.jsx
+    ├── userSlice.js
+    └── validation.jsx           # for form validation
+```
+</pre>
 ## Live Demo
 
 - You can access the live demo of the project [here.](https://searchmovierecommendationsystem.netlify.app/)

@@ -9,10 +9,13 @@ import Header from './Header';
 import GptSearchPage from "./GptSearchPage";
 import MainContainer from './MainContainer';
 import SecondaryContainer from "./SecondaryContainer";
-
+import DisplayMovie from "./DisplayMovie";
+import Footer from "./Footer";
 const Browse = () => {
 
   const showGptSearch = useSelector(store => store.gpt.showGptSearch);
+
+  const selectedMovie = useSelector((store) => store.selectedMovie.movie);
 
   useNowPlayingMovies();
   usePopularMovies();
@@ -22,9 +25,11 @@ const Browse = () => {
     <div>
       <Header/>
       {showGptSearch ? <GptSearchPage/> : 
+      selectedMovie ? <DisplayMovie movie = {selectedMovie}/> :
       <>
       <MainContainer/>
       <SecondaryContainer/>
+      <Footer/>
       </>
       }
     </div>
