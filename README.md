@@ -116,6 +116,10 @@ src/
     ├── userSlice.js
     └── validation.jsx         # Form validation helpers
 
+```
+
+---
+
 ## Live Demo
 
 - You can access the live demo of the project [here.](https://searchmovierecommendationsystem.netlify.app/)
